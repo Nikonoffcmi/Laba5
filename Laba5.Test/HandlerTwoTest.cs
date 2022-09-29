@@ -23,7 +23,10 @@ namespace Laba5.Test
         }
 
         [TestMethod]
-        public void HandlerTwoCheckOutContainsAverage() => Assert.AreEqual(Average, handlerTwo.Average);
+        public void HandlerTwoCheckOutContainsAverage()
+        {
+            Assert.AreEqual(Average, handlerTwo.Average);
+        }
 
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestMethod]

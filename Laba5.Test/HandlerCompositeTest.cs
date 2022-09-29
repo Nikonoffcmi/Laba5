@@ -29,7 +29,10 @@ namespace Laba5.Test
         public void AddHandlerOneAtTheEndTest() => CollectionAssert.Contains(handlerComposite.handlers, handlerOne);
 
         [TestMethod]
-        public void AddHandlerTwoAtTheEndTest() => CollectionAssert.Contains(handlerComposite.handlers, handlerTwo);
+        public void AddHandlerTwoAtTheEndTest()
+        {
+            CollectionAssert.Contains(handlerComposite.handlers, handlerTwo);
+        }
 
         [TestMethod]
         public void AddHandlerOneByName()

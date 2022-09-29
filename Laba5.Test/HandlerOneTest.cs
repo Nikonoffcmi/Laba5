@@ -30,7 +30,10 @@ namespace Laba5.Test
         public void HandlerOneCheckOutContainsMin() => Assert.AreEqual(min, handlerOne.MinInterf);
 
         [TestMethod]
-        public void HandlerOneCheckOutContainsMax() => Assert.AreEqual(max, handlerOne.MaxInterf);
+        public void HandlerOneCheckOutContainsMax()
+        {
+            Assert.AreEqual(max, handlerOne.MaxInterf);
+        }
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]

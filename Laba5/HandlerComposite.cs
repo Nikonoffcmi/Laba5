@@ -13,14 +13,22 @@ namespace Laba5
 
         public HandlerComposite() { handlers = new List<Handler>(); }
 
-        public void RunProcessing(List<double>  numbers)
+        public void RunProcessing(List<double> numbers)
         {
             foreach (var handler in handlers)
                 handler.RunProcessing(numbers);
         }
 
-        public void AddHandlerAtTheEnd(Handler handler) => handlers.Add(handler);
-        
+        public void AddHandlerAtTheEnd(Handler handler)
+        {
+            if (handler is null)
+            {
+                throw new ArgumentNullException(nameof(handler));
+            }
+
+            handlers.Add(handler);
+        }
+
         public bool AddHandlerByName(Handler handler, string strName)
         {
             for (int i = 0; i < handlers.Count; i++)

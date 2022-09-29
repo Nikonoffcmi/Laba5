@@ -21,7 +21,7 @@ namespace Laba5
                 throw new ArgumentException("Максимальное значение должно быть больше минимального.\n", maxInterf.ToString());
         }
 
-        public override void RunProcessing(List<double>  numbers)
+        public override void RunProcessing(List<double> numbers)
         {           
             var rnd = new Random();
             int noise = rnd.Next(MinInterf, MaxInterf);

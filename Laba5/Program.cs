@@ -129,7 +129,7 @@ namespace Laba5
                             break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }

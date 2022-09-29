@@ -10,7 +10,7 @@ namespace Laba5
     public class Handler
     {
         public string Name { get; set; }
-        public virtual void RunProcessing(List<double>  numbers) { }
+        public virtual void RunProcessing(List<double> numbers) { }
 
         public Handler() { }
 
