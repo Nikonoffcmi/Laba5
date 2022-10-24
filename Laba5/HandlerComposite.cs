@@ -9,7 +9,7 @@ namespace Laba5
 {
     public class HandlerComposite
     {
-        public List<Handler> handlers;
+        private List<Handler> handlers;
 
         public HandlerComposite() { handlers = new List<Handler>(); }
 
@@ -53,6 +53,14 @@ namespace Laba5
                 }
             }
             return false;
+        }
+
+        public List<string> GetNames()
+        {
+            var result = new List<string>();
+            foreach (var handler in handlers)
+                result.Add(handler.Name);
+            return result;
         }
     }
 }
