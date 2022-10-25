@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Laba5
 {
@@ -29,38 +31,49 @@ namespace Laba5
             handlers.Add(handler);
         }
 
-        public bool AddHandlerByName(Handler handler, string strName)
+        public void AddHandlerByName(Handler handler, string strName)
         {
+            if (handler is null)
+            {
+                throw new ArgumentNullException(nameof(handler));
+            }
+
             for (int i = 0; i < handlers.Count; i++)
             {
                 if (handlers[i].Name == strName)
                 {
                     handlers.Insert(i + 1, handler);
-                    return true;
+                    break;
                 }
             }
-            return false;
         }
 
-        public bool RemoveHandlerByName(string strName)
+        public void RemoveHandlerByName<T>(T handler, string strName)
+            where T : class
         {
             for (int i = 0; i < handlers.Count; i++)
             {
-                if (handlers[i].Name == strName)
+                if (handlers[i].Name == strName && handlers[i].GetType() == handler.GetType())
                 {
                     handlers.RemoveAt(i);
-                    return true;
+                    break;
                 }
             }
-            return false;
         }
 
         public List<string> GetNames()
         {
-            var result = new List<string>();
-            foreach (var handler in handlers)
-                result.Add(handler.Name);
-            return result;
+            return handlers.Select(name => name.Name).ToList();
+        }
+
+        public List<HandlerOne> GethandlerOne()
+        {
+            return handlers.Where(h => h.GetType() == typeof(HandlerOne)).Select(h => (HandlerOne)h).ToList();
+        }
+
+        public List<HandlerTwo> GethandlerTwo()
+        {
+            return handlers.Where(h => h.GetType() == typeof(HandlerTwo)).Select(h => (HandlerTwo)h).ToList();
         }
     }
 }
