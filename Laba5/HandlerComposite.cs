@@ -28,7 +28,10 @@ namespace Laba5
                 throw new ArgumentNullException(nameof(handler));
             }
 
-            handlers.Add(handler);
+            if (NameAbsent(handler.Name))
+                handlers.Add(handler);
+            else
+                throw new ArgumentException("Обработчик с таким именем уже существует.\n", handler.Name);
         }
 
         public void AddHandlerByName(Handler handler, string strName)
@@ -37,6 +40,11 @@ namespace Laba5
             {
                 throw new ArgumentNullException(nameof(handler));
             }
+
+            if (NameAbsent(handler.Name))
+                handlers.Add(handler);
+            else
+                throw new ArgumentException("Обработчик с таким именем уже существует.\n", handler.Name);
 
             for (int i = 0; i < handlers.Count; i++)
             {
@@ -48,17 +56,25 @@ namespace Laba5
             }
         }
 
-        public void RemoveHandlerByName<T>(T handler, string strName)
-            where T : class
+        public void RemoveHandlerByName(string name)
         {
             for (int i = 0; i < handlers.Count; i++)
             {
-                if (handlers[i].Name == strName && handlers[i].GetType() == handler.GetType())
+                if (handlers[i].Name == name)
                 {
                     handlers.RemoveAt(i);
-                    break;
+                    return;
                 }
             }
+            throw new ArgumentException("Обработчик с таким именем не существует.\n", name);
+        }
+
+        public bool NameAbsent(string name)
+        {
+            foreach (var handler in handlers)
+                if (handler.Name == name)
+                    return false;
+            return true;
         }
 
         public List<string> GetNames()
@@ -66,12 +82,12 @@ namespace Laba5
             return handlers.Select(name => name.Name).ToList();
         }
 
-        public List<HandlerOne> GethandlerOne()
+        public List<HandlerOne> GetHandlerOne()
         {
             return handlers.Where(h => h.GetType() == typeof(HandlerOne)).Select(h => (HandlerOne)h).ToList();
         }
 
-        public List<HandlerTwo> GethandlerTwo()
+        public List<HandlerTwo> GetHandlerTwo()
         {
             return handlers.Where(h => h.GetType() == typeof(HandlerTwo)).Select(h => (HandlerTwo)h).ToList();
         }

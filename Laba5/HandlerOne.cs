@@ -18,14 +18,14 @@ namespace Laba5
             if (minInterf < maxInterf)
                 MaxInterf = maxInterf;
             else
-                throw new ArgumentException("Максимальное значение должно быть больше минимального.\n", maxInterf.ToString());
+                throw new ArgumentException("Максимальное значение должно быть больше минимального.\n");
         }
 
         public override void RunProcessing(List<double> numbers)
         {           
             var rnd = new Random();
             int noise = rnd.Next(MinInterf, MaxInterf);
-            int indexNoise = rnd.Next(0, numbers.Count-1);
+            int indexNoise = rnd.Next(0, numbers.Count);
 
             numbers.Insert(indexNoise, noise);
         }
