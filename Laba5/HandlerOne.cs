@@ -9,8 +9,8 @@ namespace Laba5
 {
     public class HandlerOne : Handler
     {
-        public int MaxInterf { get; set; }
-        public int MinInterf { get; set; }
+        public int MaxInterf { get; protected set; }
+        public int MinInterf { get; protected set; }
 
         public HandlerOne (string name, int minInterf, int maxInterf) : base (name)
         {

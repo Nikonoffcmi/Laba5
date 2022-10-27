@@ -8,17 +8,13 @@ namespace Laba5.Test
         private string name;
 
         [TestInitialize]
-        public void TestInitialize()
+        public void InitializeTest()
         {
             name = "Jack";
             handler = new Handler(name);
-            handlerNull = new Handler();
         }
 
         [TestMethod]
-        public void HandlerCheckOutContainsName() => Assert.AreEqual(name, handler.Name);
-
-        [TestMethod]
-        public void HandlerContainsNullName() => Assert.IsNull(handlerNull.Name);
+        public void HandlerCheckOutContainsNameTest() => Assert.AreEqual(name, handler.Name);
     }
 }

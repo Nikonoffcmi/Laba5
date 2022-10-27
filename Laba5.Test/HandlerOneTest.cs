@@ -17,7 +17,7 @@ namespace Laba5.Test
         static int max;
 
         [ClassInitialize]
-        public static void TestInitialize(TestContext testContex)
+        public static void InitializeTest(TestContext testContex)
         {
             name = "Rick";
             min = 2;
@@ -26,18 +26,9 @@ namespace Laba5.Test
 
         }
 
-        [TestMethod]
-        public void HandlerOneCheckOutContainsMin() => Assert.AreEqual(min, handlerOne.MinInterf);
-
-        [TestMethod]
-        public void HandlerOneCheckOutContainsMax()
-        {
-            Assert.AreEqual(max, handlerOne.MaxInterf);
-        }
-
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
-        public void HandlerOneArgumentException()
+        public void HandlerOneArgumentExceptionTest()
         {
             int minEx = 6;
             int maxEx = 2;
@@ -49,11 +40,22 @@ namespace Laba5.Test
         public void HandlerOneRunProcessingCountTest()
         {
             var numbers = new List<double> { 2, 4, 6, 7 };
-            int expected = numbers.Count;
+            int expected = numbers.Count + 1;
 
             handlerOne.RunProcessing(numbers);
 
-            Assert.AreEqual(expected + 1, numbers.Count);
+            Assert.AreEqual(expected, numbers.Count);
+        }
+
+        [TestMethod]
+        public void HandlerOneRunProcessingNullListTest()
+        {
+            var numbers = new List<double>();
+            int expected = 1;
+
+            handlerOne.RunProcessing(numbers);
+
+            Assert.AreEqual(expected, numbers.Count);
         }
     }
 }

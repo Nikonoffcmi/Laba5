@@ -9,7 +9,7 @@ namespace Laba5
 {
     public class HandlerTwo : Handler
     {
-        public int Average { get; set; }
+        public int Average { get; protected set; }
 
         public HandlerTwo (string name, int average) : base (name)
         {

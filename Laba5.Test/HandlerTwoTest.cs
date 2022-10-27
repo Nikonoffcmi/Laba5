@@ -15,22 +15,16 @@ namespace Laba5.Test
         static int Average;
 
         [ClassInitialize]
-        public static void TestInitialize(TestContext testContex)
+        public static void InitializeTest(TestContext testContex)
         {
             Name = "Morty";
             Average = 2;
             handlerTwo = new HandlerTwo(Name, Average);
         }
 
-        [TestMethod]
-        public void HandlerTwoCheckOutContainsAverage()
-        {
-            Assert.AreEqual(Average, handlerTwo.Average);
-        }
-
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestMethod]
-        public void HandlerTwoAverageArgumentOutOfRangeException()
+        public void HandlerTwoAverageArgumentOutOfRangeExceptionTest()
         {
             int AverageEx = -1;
 
@@ -38,7 +32,7 @@ namespace Laba5.Test
         }
 
         [TestMethod]
-        public void HandlerTwoEvenRunProcessing()
+        public void HandlerTwoEvenRunProcessingTest()
         {
             var numbers = new List<double> { 1, 2, 3, 4 };
             var expected = new List<double> { 1.5, 3.5 };
@@ -49,9 +43,9 @@ namespace Laba5.Test
         }
 
         [TestMethod]
-        public void HandlerTwoUnevenRunProcessing()
+        public void HandlerTwoUnevenRunProcessingTest()
         {
-            handlerTwo.Average = 2;
+            handlerTwo = new HandlerTwo(Name, 2);
             var numbers = new List<double> { 2, 4, 3, 5, 1};
             var expected = new List<double> { 3, 4, 1};
 
@@ -61,11 +55,22 @@ namespace Laba5.Test
         }
 
         [TestMethod]
-        public void HandlerTwoRunProcessingdifferentAverage()
+        public void HandlerTwoRunProcessingDifferentAverageTest()
         {
-            handlerTwo.Average = 5;
+            handlerTwo = new HandlerTwo(Name, 5);
             var numbers = new List<double> { 14, 3, 4, 1, 54, -9, -12, 18 };
             var expected = new List<double> { 15.2, -1};
+
+            handlerTwo.RunProcessing(numbers);
+
+            CollectionAssert.AreEquivalent(expected, numbers);
+        }
+
+        [TestMethod]
+        public void HandlerTwoNullListRunProcessingdTest()
+        {
+            var numbers = new List<double>();
+            var expected = new List<double>();
 
             handlerTwo.RunProcessing(numbers);
 
