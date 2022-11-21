@@ -7,30 +7,6 @@ namespace Laba5
 {
     internal class Program
     {
-        //////////////////////// Практика 5 ///////////////////////////////
-        static public void JsonSerialize(HandlerComposite handlerComposite)
-        {
-            var file = "Handler.json";
-            string jsonHandlers = JsonConvert.SerializeObject(handlerComposite, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
-
-            File.WriteAllText(file, jsonHandlers);
-        }
-
-        static public HandlerComposite JsonDeserialize()
-        {
-            var file = "Handler.json";
-            HandlerComposite handlerComposite = JsonConvert.DeserializeObject<HandlerComposite>(File.ReadAllText(file), new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
-
-            return handlerComposite;
-        }
-
-        //////////////////////// Практика 5 Конец ///////////////////////////////
         public static HandlerOne AddHandlerOne()
         {
             Console.WriteLine("Введите имя обработчика");
@@ -59,6 +35,7 @@ namespace Laba5
             HandlerComposite handlerComposite = new HandlerComposite();
             HandlerOne handlerOne;
             HandlerTwo handlerTwo;
+            var json = new JsonHandlers<HandlerComposite>("Handlers.json");
             Console.WriteLine("Создайте обработчики в порядке их вызова.\n");
             for (; ; )
             {
@@ -138,10 +115,10 @@ namespace Laba5
                         case 7:
                             return;
                         case 8:
-                            JsonSerialize(handlerComposite);
+                            json.JsonSerialize(handlerComposite);
                             break;
                         case 9:
-                            handlerComposite = JsonDeserialize();
+                            handlerComposite = json.JsonDeserialize();
                             break;
                         default:
                             Console.WriteLine("Неправильный номер!");

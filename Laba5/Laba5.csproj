@@ -79,6 +79,7 @@
     <Compile Include="HandlerComposite.cs" />
     <Compile Include="HandlerOne.cs" />
     <Compile Include="HandlerTwo.cs" />
+    <Compile Include="Json.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
