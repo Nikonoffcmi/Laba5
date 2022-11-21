@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Laba5
 {
+    [DataContract]
     public class HandlerTwo : Handler
     {
+        [DataMember]
         public int Average { get; protected set; }
 
         public HandlerTwo (string name, int average) : base (name)

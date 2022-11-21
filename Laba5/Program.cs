@@ -1,14 +1,36 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Laba5
 {
     internal class Program
     {
+        //////////////////////// Практика 5 ///////////////////////////////
+        static public void JsonSerialize(HandlerComposite handlerComposite)
+        {
+            var file = "Handler.json";
+            string jsonHandlers = JsonConvert.SerializeObject(handlerComposite, Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            });
+
+            File.WriteAllText(file, jsonHandlers);
+        }
+
+        static public HandlerComposite JsonDeserialize()
+        {
+            var file = "Handler.json";
+            HandlerComposite handlerComposite = JsonConvert.DeserializeObject<HandlerComposite>(File.ReadAllText(file), new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            });
+
+            return handlerComposite;
+        }
+
+        //////////////////////// Практика 5 Конец ///////////////////////////////
         public static HandlerOne AddHandlerOne()
         {
             Console.WriteLine("Введите имя обработчика");
@@ -115,6 +137,12 @@ namespace Laba5
 
                         case 7:
                             return;
+                        case 8:
+                            JsonSerialize(handlerComposite);
+                            break;
+                        case 9:
+                            handlerComposite = JsonDeserialize();
+                            break;
                         default:
                             Console.WriteLine("Неправильный номер!");
                             break;

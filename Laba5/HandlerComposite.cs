@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Reflection;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
+using System.Runtime.Serialization;
 
 namespace Laba5
 {
+    [DataContract]
     public class HandlerComposite
     {
+        [DataMember]
         private List<Handler> handlers;
 
         public HandlerComposite() { handlers = new List<Handler>(); }
@@ -95,5 +92,7 @@ namespace Laba5
                 .Select(h => (HandlerTwo)h)
                 .ToList();
         }
+
+       
     }
 }

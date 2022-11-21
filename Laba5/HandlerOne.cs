@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Laba5
 {
+    [DataContract]
     public class HandlerOne : Handler
     {
+        [DataMember]
         public int MaxInterf { get; protected set; }
+        [DataMember]
         public int MinInterf { get; protected set; }
 
         public HandlerOne (string name, int minInterf, int maxInterf) : base (name)
