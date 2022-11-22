@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-//////////////////////// Практика 5 ///////////////////////////////
+//////////////////////// Практика 4 ///////////////////////////////
 namespace Laba5
 {
-    internal class JsonHandlers<T>
+    public class JsonHandlers<T>
         where T : class
     {
         public string FileName { get; private set; }
@@ -24,13 +24,15 @@ namespace Laba5
             T handlerComposite = JsonConvert.DeserializeObject<T>(File.ReadAllText(FileName), new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto
-            });
+            });   
 
             return handlerComposite;
         }
 
         public JsonHandlers(string fileName)
         {
+            if (!File.Exists(fileName))
+                File.Create(fileName).Close();
             FileName = fileName;
         }
     }
